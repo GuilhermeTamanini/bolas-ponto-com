@@ -1,37 +1,33 @@
-import React from "react";
-import { View, Text, Image, StyleSheet } from "react-native";
+import React from 'react';
+
+import { ScrollView, StyleSheet } from 'react-native';
+import Endereco from '../../components/Home/Endereco';
+import Input from '../../components/Input/Input';
+import CupomDesconto from '../../components/Home/CupomDesconto';
+import Sugestoes from '../../components/Home/Sugestoes';
+import Promocoes from '../../components/Home/Promocoes';
+import Ofertas from '../../components/Home/Ofertas';
+import Categorias from '../../components/Home/Categorias';
+import Restaurantes from '../../components/Home/Restaurantes';
 
 export default function Home() {
   return (
-    <View style={styles.container}> 
-      <Text style={styles.text}>Irato</Text>
-      <Image style={styles.img} source={{uri:'https://cdn.discordapp.com/attachments/1061039263296262285/1118262468565794978/ecdb3c19-1062-4bc4-8aa5-ab2ad78c65c1.jpg'}}></Image>  
-    </View>
+    <ScrollView showsHorizontalScrollIndicator={true} style={styles.container}>
+      <Endereco />
+      <Input placeholder="Busque por item ou loja" />
+      <CupomDesconto />
+      <Sugestoes />
+      <Promocoes />
+      <Ofertas />
+      <Categorias />
+      <Restaurantes />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#252525',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#fff',
-  },
-  text: {
-    color: '#fff',
-    flexDirection:'column',
-    textDecorationStyle: 'solid',
-    fontSize: 40,
-    textDecorationColor: '#fff',
-    textShadowOffset: {width: 5, height: 5},
-    textShadowRadius: 10,
-    textShadowColor: '#fff',
-  },
-  img:{
-    width: 200,
-    height: 200,
-    resizeMode: 'stretch',
-    borderRadius: 100,
+    backgroundColor: '#fffde8',
   },
 });
