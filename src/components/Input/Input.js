@@ -14,7 +14,6 @@ export default function Input(props) {
 
 const styles = StyleSheet.create({
   container: {
-    background: '#EEE',
     height: 'auto',
     flexDirection: 'row',
     alignItems: 'center',
