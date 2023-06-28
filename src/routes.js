@@ -1,82 +1,106 @@
-import react from "react";
+import React from 'react';
 
-import { MaterialIcons } from "@expo/vector-icons";
-import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 
-import Home from "./pages/Home";
-import Busca from "./pages/Busca";
-import Perfil from "./pages/Perfil";
-import Pedidos from "./pages/Pedidos";
-import PedidosAnteriores from "./pages/PedidosAnteriores";
-import Carteira from "./pages/Carteira";
-import Pagamentos from "./pages/Pagamentos";
+import { MaterialIcons } from '@expo/vector-icons';
 
-const BottomTab = createBottomTabNavigator(); 
+import Home from './pages/Home';
+import Busca from './pages/Busca';
+import Perfil from './pages/Perfil';
+import Pedidos from './pages/Pedidos';
+import PedidosAnteriores from './pages/PedidosAnteriores';
+import Pagamentos from './pages/Pagamentos';
+import Item from './pages/Item';
 
-export default function Routes() {
+const BottomTab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+const Tab = createMaterialTopTabNavigator();
+
+function HomeRoutes() {
   return (
-    <NavigationContainer>
-        <BottomTab.Navigator activeColor="red" inactiveColor="gray">
-            <BottomTab.Screen name="Home" component={Home} options={{
-                tabBarLabel: 'Home',
-                tabBarIcon: ({ color }) => (
-                    <MaterialIcons name="home" color={color} size={26} />
-                ),
-            }} 
-            />
-           <BottomTab.Screen name="Busca" component={Busca} options={{
-                tabBarLabel: 'Busca',
-                tabBarIcon: ({ color }) => (
-                    <MaterialIcons name="search" color={color} size={26} />
-                ),
-            }} 
-            />
-            <BottomTab.Screen name="Pedidos" component={PedidosRouter} options={{
-                tabBarLabel: 'Pedidos',
-                tabBarIcon: ({ color }) => (
-                    <MaterialIcons name="assignment" color={color} size={26} />
-                ),
-            }} 
-            />
-            <BottomTab.Screen name="PerfilRoutes" component={PerfilRoutes} options={{
-                headerShown: false,
-                tabBarLabel: 'Perfil',
-                tabBarIcon: ({ color }) => (
-                    <MaterialIcons name="person" color={color} size={26} />
-                ),
-            }}
-            />
-        </BottomTab.Navigator>    
-    </NavigationContainer>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Item" component={Item} />
+    </Stack.Navigator>
   );
 }
 
-export function PerfilRoutes() {
-    const Stack = createNativeStackNavigator();
-    
-    return (
-        <Stack.Navigator>
-        <Stack.Screen name="Perfil" component={Perfil} />
-        <Stack.Screen name="Carteira" component={Carteira} />
-        <Stack.Screen name="Pagamentos" component={Pagamentos} />
-        </Stack.Navigator>
-    );
-}
-
-const Tab = createMaterialTopTabNavigator(); 
-
-export function PedidosRouter() {
+function PedidosRouter() {
   return (
     <Tab.Navigator>
       <Tab.Screen name="Pedidos" component={Pedidos} />
       <Tab.Screen
         name="PedidosAnteriores"
         component={PedidosAnteriores}
-        options={{ tabBarLabel: 'Pedidos Anteriores' }}
+        options={{ tabBarLabel: 'Pedidos Anteriores' }} 
       />
     </Tab.Navigator>
+  );
+}
+
+function PerfilRoutes() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Perfil" component={Perfil} />
+      <Stack.Screen name="Pagamentos" component={Pagamentos} />
+    </Stack.Navigator>
+  );
+}
+
+export default function Routes() {
+  return (
+    <NavigationContainer>
+      <BottomTab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: 'red',
+          tabBarInactiveTintColor: 'black',
+        }} 
+      >
+        <BottomTab.Screen
+          name="HomeRoutes"
+          component={HomeRoutes}
+          options= {{
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="home" color={color} size={26} />
+            ),
+          }} 
+        />
+        <BottomTab.Screen
+          name="Busca"
+          component={Busca}
+          options= {{
+            tabBarLabel: 'Busca',
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="search" color={color} size={26} />
+            ),
+          }} 
+        />
+        <BottomTab.Screen
+          name="PedidosRouter"
+          component={PedidosRouter}
+          options= {{
+            tabBarLabel: 'Pedidos',
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="assignment" color={color} size={26} />
+            ),
+          }} 
+        />
+        <BottomTab.Screen
+          name="PerfilRoutes"
+          component={PerfilRoutes}
+          options= {{
+            headerShown: false,
+            tabBarLabel: 'Perfil',
+            tabBarIcon: ({ color }) => (
+              <MaterialIcons name="person" color={color} size={26} />
+            ),
+          }} 
+        />
+      </BottomTab.Navigator>
+    </NavigationContainer>
   );
 }
